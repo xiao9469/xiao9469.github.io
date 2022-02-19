@@ -4,15 +4,26 @@
   <meta charset="utf-8">
   
   
-  <title>Archives | Hexo</title>
+  <title>Java中线程的同步 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="线程的同步方法一：同步代码块同步代码块的方式，要重点关注  同步监视器  和 共享数据 同步监视器——任意一个类对象同步代码——需要被同步的代码共享数据——多个线程共同操作的对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中线程的同步">
+<meta property="og:url" content="http://example.com/2021/05/29/Java%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%90%8C%E6%AD%A5/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="线程的同步方法一：同步代码块同步代码块的方式，要重点关注  同步监视器  和 共享数据 同步监视器——任意一个类对象同步代码——需要被同步的代码共享数据——多个线程共同操作的对象">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330220211754.png">
+<meta property="og:image" content="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330222756129.png">
+<meta property="og:image" content="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330223350972.png">
+<meta property="og:image" content="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330225220167.png">
+<meta property="og:image" content="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210410181758620.png">
+<meta property="article:published_time" content="2021-05-29T03:41:56.000Z">
+<meta property="article:modified_time" content="2021-05-29T03:56:38.427Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="线程的同步">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330220211754.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -69,210 +80,86 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/29/%E5%85%A8%E6%8E%92%E5%88%97%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-29T08:14:15.000Z" itemprop="datePublished">May 29</time>
+        <section id="main"><article id="post-Java中线程的同步" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/29/Java%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%90%8C%E6%AD%A5/" class="article-date">
+  <time class="dt-published" datetime="2021-05-29T03:41:56.000Z" itemprop="datePublished">2021-05-29</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/29/%E5%85%A8%E6%8E%92%E5%88%97%E7%AE%97%E6%B3%95/">全排列算法</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java中线程的同步
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/29/%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BC%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-29T08:12:57.000Z" itemprop="datePublished">May 29</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/29/%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BC%E7%AE%97%E6%B3%95/">求最大值算法</a>
-    </h1>
-  
+        <h2 id="线程的同步"><a href="#线程的同步" class="headerlink" title="线程的同步"></a>线程的同步</h2><h3 id="方法一：同步代码块"><a href="#方法一：同步代码块" class="headerlink" title="方法一：同步代码块"></a>方法一：同步代码块</h3><p>同步代码块的方式，要重点关注  同步监视器  和 共享数据</p>
+<p>同步监视器——任意一个类对象<br>同步代码——需要被同步的代码<br>共享数据——多个线程共同操作的对象<span id="more"></span></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">synchronize(同步监视器)&#123;</span><br><span class="line">	同步代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/29/%E5%9B%9E%E6%96%87%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-29T08:11:39.000Z" itemprop="datePublished">May 29</time>
-</a>
+<p>锁的对象是任意一个类的对象，但必须所有的锁用同一个对象</p>
+<p><img src="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330220211754.png" alt="image-20210330220211754"></p>
+<p>实现runnable方式的锁也可以使用this，对于继承方式则不可以。 </p>
+<p><img src="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330222756129.png" alt="image-20210330222756129"></p>
+<p>第三种就是使用当前的类</p>
+<p><img src="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330223350972.png" alt="image-20210330223350972"></p>
+<h3 id="方法二：同步方法"><a href="#方法二：同步方法" class="headerlink" title="方法二：同步方法"></a>方法二：同步方法</h3><p>把需要加锁的代码放到一个方法中，在加修饰词的时候 加上synchronize，</p>
+<p>不适用于继承Thread的方式，因为此时this不唯一，如果一定要在继承Thread方式中使用同步方法，那么要把同步方法加上静态，并且静态方法里面不能调用非静态方法【语法错误】。</p>
+<p>非静态的同步方法：默认同步监视器——this<br>静态的同步方法：    默认同步监视器——当前类本身</p>
+<p><img src="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210330225220167.png" alt="image-20210330225220167"></p>
+<h3 id="方法三：Lock锁"><a href="#方法三：Lock锁" class="headerlink" title="方法三：Lock锁"></a>方法三：Lock锁</h3><p><img src="https://imag-blog-xiaojiajia.oss-cn-shenzhen.aliyuncs.com/image-20210410181758620.png" alt="image-20210410181758620"></p>
+<h2 id="lock和synchronize的异同"><a href="#lock和synchronize的异同" class="headerlink" title="lock和synchronize的异同"></a>lock和synchronize的异同</h2><p>相同点：都是处理线程安全问题</p>
+<p>不同点：</p>
+<p>lock方法需要手动启动和关闭同步。在哪调用解锁就是在哪取消同步<br>synchronize执行完是自动的释放同步监视器</p>
+<p>synchronize是比较早期出现的<br>lock是jdk5之后新增的   两种都可以用 lock &gt;同步代码块&gt;同步方法</p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/29/%E5%9B%9E%E6%96%87%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95/">回文判断算法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/29/Java%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%90%8C%E6%AD%A5/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-29T03:41:56.000Z" itemprop="datePublished">May 29</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/29/Java%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%90%8C%E6%AD%A5/" data-id="ckztp1e160004cstk5gw67cv3" data-title="Java中线程的同步" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/29/Java%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%90%8C%E6%AD%A5/">Java中线程的同步</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/28/%E4%BA%8C%E5%88%86%E6%B3%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-28T14:43:11.000Z" itemprop="datePublished">May 28</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/28/%E4%BA%8C%E5%88%86%E6%B3%95/">二分法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/28/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-28T12:14:58.000Z" itemprop="datePublished">May 28</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/28/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">算法的时间复杂度</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%90%8C%E6%AD%A5/" rel="tag">线程的同步</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/27/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-27T15:19:47.000Z" itemprop="datePublished">May 27</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/27/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/">Java中的多线程</a>
-    </h1>
+    <a href="/2021/05/29/%E5%9B%9E%E6%96%87%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          回文判断算法
+        
+      </div>
+    </a>
   
+  
+    <a href="/2021/05/28/%E4%BA%8C%E5%88%86%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">二分法</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/27/hexo5.4%E6%94%B9%E5%8F%98%E6%96%87%E7%AB%A0%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-26T17:42:15.000Z" itemprop="datePublished">May 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/27/hexo5.4%E6%94%B9%E5%8F%98%E6%96%87%E7%AB%A0%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F/">hexo5.4改变文章字体大小</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/26/hexo%E5%8F%91%E7%94%9Ferror%EF%BC%9Aspawn-failed%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-26T12:32:53.000Z" itemprop="datePublished">May 26</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/26/hexo%E5%8F%91%E7%94%9Ferror%EF%BC%9Aspawn-failed%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">hexo发生error：spawn failed错误的解决方法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/26/%E9%87%8D%E5%9B%9E%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-05-26T11:52:29.000Z" itemprop="datePublished">May 26</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/26/%E9%87%8D%E5%9B%9E%E5%8D%9A%E5%AE%A2/">重回博客</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
 
 </section>
